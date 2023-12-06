@@ -38,14 +38,43 @@ func (o *Order) CloseOrder() {
 type OrderAction string
 
 const (
-	Buy  OrderAction = "BUY"
-	Sell OrderAction = "SELL"
+	Buy              OrderAction = "BUY"
+	Sell             OrderAction = "SELL"
+	UnknownOrderType OrderAction = "UNKNOWN_ORDER_TYPE"
 )
+
+func MapOrderAction(action string) OrderAction {
+	actionMap := map[string]OrderAction{
+		"BUY":  Buy,
+		"SELL": Sell,
+	}
+
+	if val, found := actionMap[action]; found {
+		return val
+	}
+
+	return UnknownOrderType
+}
 
 type OrderStatus string
 
 const (
-	Open     OrderStatus = "OPEN"
-	Closed   OrderStatus = "CLOSED"
-	Canceled OrderStatus = "CANCELED"
+	Open               OrderStatus = "OPEN"
+	Closed             OrderStatus = "CLOSED"
+	Canceled           OrderStatus = "CANCELED"
+	UnknownOrderStatus OrderStatus = "UNKNOWN_ORDER_STATUS"
 )
+
+func MapOrderStatus(action string) OrderStatus {
+	actionMap := map[string]OrderStatus{
+		"OPEN":     Open,
+		"CLOSED":   Closed,
+		"CANCELED": Canceled,
+	}
+
+	if val, found := actionMap[action]; found {
+		return val
+	}
+
+	return UnknownOrderStatus
+}
